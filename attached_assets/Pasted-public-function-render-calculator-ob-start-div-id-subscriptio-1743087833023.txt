@@ -1,0 +1,78 @@
+public function render_calculator() {
+        ob_start();
+        ?>
+        <div id="subscription-calculator-container">
+            <form id="subscription-score-form">
+                <div class="form-group">
+                    <label for="age">나이</label>
+                    <select id="age" name="age" required>
+                        <option value="">나이 선택</option>
+                        <?php for($i = 19; $i <= 70; $i++): ?>
+                            <option value="<?php echo $i; ?>"><?php echo $i; ?>세</option>
+                        <?php endfor; ?>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="no-home-period">무주택 기간</label>
+                    <select id="no-home-period" name="no_home_period" required>
+                        <option value="">무주택 기간 선택</option>
+                        <?php for($i = 0; $i <= 20; $i++): ?>
+                            <option value="<?php echo $i; ?>"><?php echo $i; ?>년</option>
+                        <?php endfor; ?>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="dependents">부양 가족 수</label>
+                    <select id="dependents" name="dependents" required>
+                        <option value="">부양 가족 수 선택</option>
+                        <?php for($i = 0; $i <= 6; $i++): ?>
+                            <option value="<?php echo $i; ?>"><?php echo $i; ?>명</option>
+                        <?php endfor; ?>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="subscription-period">청약 통장 가입 기간</label>
+                    <select id="subscription-period" name="subscription_period" required>
+                        <option value="">가입 기간 선택</option>
+                        <?php for($i = 0; $i <= 20; $i++): ?>
+                            <option value="<?php echo $i; ?>"><?php echo $i; ?>년</option>
+                        <?php endfor; ?>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="income">연간 소득</label>
+                    <select id="income" name="income" required>
+                        <option value="">연간 소득 선택</option>
+                        <option value="1000">1,000만원 미만</option>
+                        <option value="2000">1,000-2,000만원</option>
+                        <option value="3000">2,000-3,000만원</option>
+                        <option value="4000">3,000-4,000만원</option>
+                        <option value="5000">4,000-5,000만원</option>
+                        <option value="6000">5,000-6,000만원</option>
+                        <option value="7000">6,000만원 이상</option>
+                    </select>
+                </div>
+
+                <button type="submit" id="calculate-score-btn">점수 계산</button>
+            </form>
+
+            <div id="score-result" class="hidden">
+                <h3>청약 점수 결과</h3>
+                <div class="score-details">
+                    <p>나이 점수: <span id="age-score">0</span>점</p>
+                    <p>무주택 기간 점수: <span id="no-home-score">0</span>점</p>
+                    <p>부양 가족 수 점수: <span id="dependents-score">0</span>점</p>
+                    <p>청약 통장 가입 기간 점수: <span id="subscription-period-score">0</span>점</p>
+                    <p>연간 소득 점수: <span id="income-score">0</span>점</p>
+                </div>
+                <p><strong>총점수: <span id="total-score">0</span>점</strong></p>
+                <p>당첨 가능성: <span id="winning-probability">-</span></p>
+            </div>
+        </div>
+        <?php
+        return ob_get_clean();
+    }
