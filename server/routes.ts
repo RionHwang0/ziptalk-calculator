@@ -4,6 +4,9 @@ import { storage } from "./storage";
 import * as XLSX from 'xlsx';
 import path from 'path';
 import fs from 'fs';
+import { db } from "./db";
+import { competitionData, apartments } from "@shared/schema";
+import { eq } from "drizzle-orm";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // API routes
@@ -43,6 +46,29 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error('Error processing competition data:', error);
       res.status(500).json({ error: 'Failed to process competition data' });
+    }
+  });
+
+  // Get all competition data entries
+  app.get('/api/competition-data/all', async (req, res) => {
+    try {
+      const entries = await db.select().from(competitionData);
+      res.json(entries);
+    } catch (error) {
+      console.error('Error fetching competition data:', error);
+      res.status(500).json({ error: 'Failed to fetch competition data' });
+    }
+  });
+
+  // Delete competition data by ID
+  app.delete('/api/competition-data/:id', async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      await db.delete(competitionData).where(eq(competitionData.id, id));
+      res.json({ success: true });
+    } catch (error) {
+      console.error('Error deleting competition data:', error);
+      res.status(500).json({ error: 'Failed to delete competition data' });
     }
   });
 
@@ -109,6 +135,21 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error('Error fetching apartment:', error);
       res.status(500).json({ error: 'Failed to fetch apartment' });
+    }
+  });
+  
+  // Delete apartment by ID
+  app.delete('/api/apartments/:id', async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      
+      // Delete the apartment from the database
+      await db.delete(apartments).where(eq(apartments.id, id));
+      
+      res.json({ success: true });
+    } catch (error) {
+      console.error('Error deleting apartment:', error);
+      res.status(500).json({ error: 'Failed to delete apartment' });
     }
   });
   
