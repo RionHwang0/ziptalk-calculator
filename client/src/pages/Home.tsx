@@ -1,15 +1,20 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SubscriptionCalculator from "@/components/SubscriptionCalculator";
 import ScoreResults from "@/components/ScoreResults";
-import CompetitionRateUpload from "@/components/CompetitionRateUpload";
 import ApartmentMap from "@/components/ApartmentMap";
 import CompetitionAnalysis from "@/components/CompetitionAnalysis";
 import { CalculatedScore } from "@/lib/calculator";
+import { useQuery } from "@tanstack/react-query";
 
 export default function Home() {
   const [calculatedScore, setCalculatedScore] = useState<CalculatedScore | null>(null);
-  const [competitionData, setCompetitionData] = useState(null);
-  const [selectedApartment, setSelectedApartment] = useState(null);
+  const [selectedApartment, setSelectedApartment] = useState<any>(null);
+  
+  // 데이터베이스에서 경쟁률 데이터 가져오기
+  const { data: competitionData, isLoading } = useQuery({
+    queryKey: ['/api/apartments'],
+    refetchOnWindowFocus: false
+  });
 
   return (
     <div className="font-sans bg-[#F5F6F7] text-[#333333] min-h-screen">
@@ -39,7 +44,18 @@ export default function Home() {
 
           {/* Right Column */}
           <div className="w-full lg:w-1/2">
-            <CompetitionRateUpload onUpload={setCompetitionData} />
+            <div className="bg-white rounded-lg shadow-md p-6 mb-6">
+              <h2 className="text-xl font-bold mb-4">아파트 경쟁률 데이터</h2>
+              <p className="text-gray-600 mb-2">아파트 경쟁률 데이터는 관리자에 의해 제공됩니다.</p>
+              <p className="text-gray-600 mb-4">아래 지도에서 아파트를 선택하여 경쟁률 정보를 확인할 수 있습니다.</p>
+              {isLoading ? (
+                <div className="py-4 text-center text-gray-500">데이터 로딩 중...</div>
+              ) : (
+                <div className="py-2 px-4 bg-gray-100 rounded text-sm">
+                  총 {competitionData?.length || 0}개의 아파트 데이터가 있습니다.
+                </div>
+              )}
+            </div>
             <ApartmentMap 
               competitionData={competitionData} 
               onApartmentSelect={setSelectedApartment} 
