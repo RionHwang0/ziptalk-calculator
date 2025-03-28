@@ -39,6 +39,7 @@ function Header() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [password, setPassword] = useState("");
   const [showAuthModal, setShowAuthModal] = useState(false);
+  const [showAdminButton, setShowAdminButton] = useState(false);
   const [, navigate] = useLocation();
 
   // 관리자 인증 처리
@@ -50,18 +51,32 @@ function Header() {
       setIsAuthenticated(true);
       sessionStorage.setItem('isAdminAuthenticated', 'true');
       setShowAuthModal(false);
+      setShowAdminButton(true);
       navigate("/admin");
     } else {
       alert("비밀번호가 일치하지 않습니다.");
     }
   };
 
-  // 컴포넌트 마운트 시 인증 상태 확인
+  // 컴포넌트 마운트 시 인증 상태 확인 및 특수 키 조합 감지 설정
   useEffect(() => {
     const authStatus = sessionStorage.getItem('isAdminAuthenticated') === 'true';
     if (authStatus) {
       setIsAuthenticated(true);
+      setShowAdminButton(true);
     }
+    
+    // 특수 키 조합(Ctrl+Shift+A)을 감지하여 관리자 접근 모달 표시
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.ctrlKey && e.shiftKey && e.key === 'A') {
+        setShowAuthModal(true);
+      }
+    };
+    
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
   }, []);
 
   // Admin 페이지로 이동하려고 할 때 인증 모달 표시
@@ -81,11 +96,13 @@ function Header() {
           <h1 className="text-xl font-bold cursor-pointer">청약 점수 계산기</h1>
         </Link>
         <nav>
-          <a href="/admin" onClick={handleAdminClick}>
-            <Button variant="secondary" className="bg-white text-yellow-600 hover:bg-gray-100">
-              관리자 페이지
-            </Button>
-          </a>
+          {showAdminButton && (
+            <a href="/admin" onClick={handleAdminClick}>
+              <Button variant="secondary" className="bg-white text-yellow-600 hover:bg-gray-100">
+                관리자 페이지
+              </Button>
+            </a>
+          )}
         </nav>
       </div>
       
