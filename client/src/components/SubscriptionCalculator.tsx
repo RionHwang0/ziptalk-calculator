@@ -70,12 +70,18 @@ export default function SubscriptionCalculator({ onCalculate }: SubscriptionCalc
               <SelectTrigger className="w-full p-3 border rounded-lg">
                 <SelectValue placeholder="나이 선택" />
               </SelectTrigger>
-              <SelectContent>
-                {Array.from({ length: 52 }, (_, i) => i + 19).map((age) => (
-                  <SelectItem key={age} value={age.toString()}>
-                    {age}세
-                  </SelectItem>
-                ))}
+              <SelectContent className="max-h-[15rem] overflow-y-auto">
+                <SelectItem value="19">19세 미만</SelectItem>
+                <SelectItem value="20">20-24세</SelectItem>
+                <SelectItem value="25">25-29세</SelectItem>
+                <SelectItem value="30">30-34세</SelectItem>
+                <SelectItem value="35">35-39세</SelectItem>
+                <SelectItem value="40">40-44세</SelectItem>
+                <SelectItem value="45">45-49세</SelectItem>
+                <SelectItem value="50">50-54세</SelectItem>
+                <SelectItem value="55">55-59세</SelectItem>
+                <SelectItem value="60">60-64세</SelectItem>
+                <SelectItem value="65">65세 이상</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -87,12 +93,18 @@ export default function SubscriptionCalculator({ onCalculate }: SubscriptionCalc
               <SelectTrigger className="w-full p-3 border rounded-lg">
                 <SelectValue placeholder="무주택 기간 선택" />
               </SelectTrigger>
-              <SelectContent>
-                {Array.from({ length: 21 }, (_, i) => i).map((year) => (
-                  <SelectItem key={year} value={year.toString()}>
-                    {year}년
-                  </SelectItem>
-                ))}
+              <SelectContent className="max-h-[15rem] overflow-y-auto">
+                <SelectItem value="0">없음</SelectItem>
+                <SelectItem value="1">1년 미만</SelectItem>
+                <SelectItem value="2">1-2년</SelectItem>
+                <SelectItem value="3">2-3년</SelectItem>
+                <SelectItem value="4">3-4년</SelectItem>
+                <SelectItem value="5">4-5년</SelectItem>
+                <SelectItem value="8">5-8년</SelectItem>
+                <SelectItem value="10">8-10년</SelectItem>
+                <SelectItem value="12">10-12년</SelectItem>
+                <SelectItem value="15">12-15년</SelectItem>
+                <SelectItem value="20">15년 이상</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -104,12 +116,14 @@ export default function SubscriptionCalculator({ onCalculate }: SubscriptionCalc
               <SelectTrigger className="w-full p-3 border rounded-lg">
                 <SelectValue placeholder="부양 가족 수 선택" />
               </SelectTrigger>
-              <SelectContent>
-                {Array.from({ length: 7 }, (_, i) => i).map((count) => (
-                  <SelectItem key={count} value={count.toString()}>
-                    {count}명
-                  </SelectItem>
-                ))}
+              <SelectContent className="max-h-[15rem] overflow-y-auto">
+                <SelectItem value="0">없음</SelectItem>
+                <SelectItem value="1">1명</SelectItem>
+                <SelectItem value="2">2명</SelectItem>
+                <SelectItem value="3">3명</SelectItem>
+                <SelectItem value="4">4명</SelectItem>
+                <SelectItem value="5">5명</SelectItem>
+                <SelectItem value="6">6명 이상</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -121,12 +135,20 @@ export default function SubscriptionCalculator({ onCalculate }: SubscriptionCalc
               <SelectTrigger className="w-full p-3 border rounded-lg">
                 <SelectValue placeholder="가입 기간 선택" />
               </SelectTrigger>
-              <SelectContent>
-                {Array.from({ length: 21 }, (_, i) => i).map((year) => (
-                  <SelectItem key={year} value={year.toString()}>
-                    {year}년
-                  </SelectItem>
-                ))}
+              <SelectContent className="max-h-[15rem] overflow-y-auto">
+                <SelectItem value="0">없음</SelectItem>
+                <SelectItem value="1">1년 미만</SelectItem>
+                <SelectItem value="2">1-2년</SelectItem>
+                <SelectItem value="3">2-3년</SelectItem>
+                <SelectItem value="4">3-4년</SelectItem>
+                <SelectItem value="5">4-5년</SelectItem>
+                <SelectItem value="6">5-6년</SelectItem>
+                <SelectItem value="7">6-7년</SelectItem>
+                <SelectItem value="8">7-8년</SelectItem>
+                <SelectItem value="9">8-9년</SelectItem>
+                <SelectItem value="10">9-10년</SelectItem>
+                <SelectItem value="15">10-15년</SelectItem>
+                <SelectItem value="20">15년 이상</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -138,7 +160,7 @@ export default function SubscriptionCalculator({ onCalculate }: SubscriptionCalc
               <SelectTrigger className="w-full p-3 border rounded-lg">
                 <SelectValue placeholder="연간 소득 선택" />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="max-h-[15rem] overflow-y-auto">
                 <SelectItem value="1000">1,000만원 미만</SelectItem>
                 <SelectItem value="2000">1,000-2,000만원</SelectItem>
                 <SelectItem value="3000">2,000-3,000만원</SelectItem>
