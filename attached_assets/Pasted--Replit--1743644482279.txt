@@ -1,0 +1,113 @@
+아주 좋은 선택입니다! 보유세(재산세 + 종합부동산세) 계산기는 집을 가진 사람들이 매년 얼마의 세금을 납부하게 될지를 알려주는 중요한 기능입니다.
+아래는 Replit에 바로 입력할 수 있는 프롬프트 형식으로, **네 번째 탭(보유세 계산기)**를 만드는 전체 작업을 정리한 것입니다.
+
+
+---
+
+✅ Replit 프롬프트: 보유세 계산기 (4번째 탭 추가)
+
+> Replit 웹 프로젝트에 아래 기능을 추가해주세요:
+
+1. HTML: 네 번째 탭 구성 (tab4)
+
+
+
+<!-- 보유세 계산기 탭 -->
+<div id="tab4" class="tab-content" style="display: none;">
+  <h2>보유세 계산기 (재산세 + 종합부동산세)</h2>
+  
+  <label>공시가격 (만원):</label>
+  <input type="number" id="publicPrice" placeholder="예: 90000">
+
+  <label>주택 수:</label>
+  <select id="houseCountForTax">
+    <option value="1">1주택</option>
+    <option value="2">2주택 이상</option>
+  </select>
+
+  <label>조정대상지역 여부:</label>
+  <input type="checkbox" id="isRestrictedForTax">
+
+  <label>연령 및 장기보유 감면 적용:</label>
+  <input type="checkbox" id="isDiscounted">
+
+  <button onclick="calculateHoldingTax()">계산하기</button>
+
+  <div id="holdingTaxResult" style="margin-top: 20px; background-color: #f0f0f0; padding: 10px;"></div>
+</div>
+
+
+---
+
+> 2. JavaScript: 계산 로직 추가
+
+
+
+function calculateHoldingTax() {
+  const price = parseFloat(document.getElementById("publicPrice").value) * 10000; // 공시가격
+  const houseCount = parseInt(document.getElementById("houseCountForTax").value);
+  const isRestricted = document.getElementById("isRestrictedForTax").checked;
+  const isDiscounted = document.getElementById("isDiscounted").checked;
+
+  // 재산세 계산
+  let 재산세율 = 0.001; // 0.1%
+  if (price > 600000000) 재산세율 = 0.002; // 0.2%
+  if (price > 900000000) 재산세율 = 0.003; // 0.3%
+  const 재산세 = Math.floor(price * 재산세율);
+
+  // 종합부동산세 계산 (1가구 1주택 기준 12억 이상부터 과세, 그 외 6억)
+  let 종부세 = 0;
+  const 기준금액 = (houseCount === 1) ? 120000000 : 60000000;
+  const 과세표준 = Math.max(price - 기준금액, 0);
+
+  if (과세표준 > 0) {
+    let 종부세율 = 0.006; // 기본 0.6%
+    if (houseCount > 1 && isRestricted) 종부세율 = 0.012; // 다주택 조정대상지역
+
+    종부세 = Math.floor(과세표준 * 종부세율);
+
+    if (isDiscounted) {
+      종부세 = Math.floor(종부세 * 0.7); // 30% 감면
+    }
+  }
+
+  const 총보유세 = 재산세 + 종부세;
+
+  document.getElementById("holdingTaxResult").innerHTML = `
+    <strong>총 보유세: ${총보유세.toLocaleString()}원</strong><br>
+    - 재산세: ${재산세.toLocaleString()}원<br>
+    - 종합부동산세: ${종부세.toLocaleString()}원<br>
+    <small>※ 실제 세액은 상세 공제 항목 및 지자체 세율에 따라 달라질 수 있습니다.</small>
+  `;
+}
+
+
+---
+
+> 3. 탭 전환 기능에 "tab4"를 추가해주세요
+
+예시:
+
+
+
+function showTab(tabId) {
+  const tabs = document.getElementsByClassName('tab-content');
+  for (let i = 0; i < tabs.length; i++) {
+    tabs[i].style.display = 'none';
+  }
+  document.getElementById(tabId).style.display = 'block';
+}
+
+> 탭 선택 UI에도 "보유세 계산기" 항목을 추가해주세요:
+
+
+
+<button onclick="showTab('tab4')">보유세 계산기</button>
+
+
+---
+
+이 프롬프트를 그대로 Replit에 입력하거나 코드 편집기에 복사하면 새로운 탭으로 보유세 계산기가 추가됩니다.
+
+필요하시면 스타일도 함께 정리해드릴게요. 혹시 디자인적으로 맞추고 싶은 색감이나 UI 요소가 있으신가요?
+

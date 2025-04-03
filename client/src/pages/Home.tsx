@@ -4,6 +4,7 @@ import SubscriptionCalculator from "@/components/SubscriptionCalculator";
 import ScoreResults from "@/components/ScoreResults";
 import AreaCalculator from "@/components/AreaCalculator";
 import TaxCalculator from "@/components/TaxCalculator";
+import HoldingTaxCalculator from "@/components/HoldingTaxCalculator";
 import { CalculatedScore } from "@/lib/calculator";
 
 export default function Home() {
@@ -34,10 +35,11 @@ export default function Home() {
           onValueChange={setActiveTab}
           className="w-full"
         >
-          <TabsList className="grid w-full max-w-xl mx-auto grid-cols-3 mb-8">
+          <TabsList className="grid w-full max-w-xl mx-auto grid-cols-4 mb-8">
             <TabsTrigger value="subscription">청약 점수 계산기</TabsTrigger>
             <TabsTrigger value="area">평수 계산기</TabsTrigger>
             <TabsTrigger value="tax">취득세 계산기</TabsTrigger>
+            <TabsTrigger value="holdingtax">보유세 계산기</TabsTrigger>
           </TabsList>
 
           {/* Subscription Calculator Tab */}
@@ -61,6 +63,13 @@ export default function Home() {
               <TaxCalculator />
             </div>
           </TabsContent>
+          
+          {/* Holding Tax Calculator Tab */}
+          <TabsContent value="holdingtax">
+            <div className="max-w-lg mx-auto">
+              <HoldingTaxCalculator />
+            </div>
+          </TabsContent>
         </Tabs>
       </main>
 
@@ -79,7 +88,7 @@ export default function Home() {
                   <li><a href="#" className="text-gray-400 hover:text-white transition">청약 점수 계산</a></li>
                   <li><a href="#" className="text-gray-400 hover:text-white transition">평수 계산기</a></li>
                   <li><a href="#" className="text-gray-400 hover:text-white transition">취득세 계산기</a></li>
-                  <li><a href="#" className="text-gray-400 hover:text-white transition">부동산 뉴스</a></li>
+                  <li><a href="#" className="text-gray-400 hover:text-white transition">보유세 계산기</a></li>
                   <li><a href="#" className="text-gray-400 hover:text-white transition">자주 묻는 질문</a></li>
                 </ul>
               </div>
