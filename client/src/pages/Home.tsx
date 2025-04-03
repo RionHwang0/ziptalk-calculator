@@ -35,11 +35,11 @@ export default function Home() {
           onValueChange={setActiveTab}
           className="w-full"
         >
-          <TabsList className="grid w-full max-w-xl mx-auto grid-cols-4 mb-8">
-            <TabsTrigger value="subscription">청약 점수 계산기</TabsTrigger>
-            <TabsTrigger value="area">평수 계산기</TabsTrigger>
-            <TabsTrigger value="tax">취득세 계산기</TabsTrigger>
-            <TabsTrigger value="holdingtax">보유세 계산기</TabsTrigger>
+          <TabsList className="grid w-full max-w-3xl mx-auto grid-cols-4 mb-8 text-xs md:text-sm">
+            <TabsTrigger value="subscription" className="px-1 md:px-2">청약 점수</TabsTrigger>
+            <TabsTrigger value="area" className="px-1 md:px-2">평수 계산</TabsTrigger>
+            <TabsTrigger value="tax" className="px-1 md:px-2">취득세 계산</TabsTrigger>
+            <TabsTrigger value="holdingtax" className="px-1 md:px-2">보유세 계산</TabsTrigger>
           </TabsList>
 
           {/* Subscription Calculator Tab */}
