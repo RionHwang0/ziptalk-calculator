@@ -35,11 +35,11 @@ export default function Home() {
           onValueChange={setActiveTab}
           className="w-full"
         >
-          <TabsList className="grid w-full max-w-xl mx-auto grid-cols-4 mb-8 gap-2 p-1 bg-[#F0F0F0] rounded-lg">
-            <TabsTrigger className="rounded-md py-2 font-medium" value="subscription">청약 점수 계산기</TabsTrigger>
-            <TabsTrigger className="rounded-md py-2 font-medium" value="area">평수 계산기</TabsTrigger>
-            <TabsTrigger className="rounded-md py-2 font-medium" value="tax">취득세 계산기</TabsTrigger>
-            <TabsTrigger className="rounded-md py-2 font-medium" value="holdingtax">보유세 계산기</TabsTrigger>
+          <TabsList className="grid w-full max-w-xl mx-auto grid-cols-4 mb-8">
+            <TabsTrigger value="subscription">청약 점수 계산기</TabsTrigger>
+            <TabsTrigger value="area">평수 계산기</TabsTrigger>
+            <TabsTrigger value="tax">취득세 계산기</TabsTrigger>
+            <TabsTrigger value="holdingtax">보유세 계산기</TabsTrigger>
           </TabsList>
 
           {/* Subscription Calculator Tab */}
