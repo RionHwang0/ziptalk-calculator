@@ -157,7 +157,10 @@ export default function TaxCalculator() {
         
         {taxResult && (
           <div className="mt-8 p-4 bg-[#F5F6F7] rounded-lg space-y-2">
-            <h3 className="text-lg font-bold mb-3 whitespace-nowrap overflow-hidden text-ellipsis">총 예상 초기 비용: {formatNumber(taxResult.totalCost)}원</h3>
+            <div className="flex justify-between items-center mb-3">
+              <h3 className="text-lg font-bold">총 예상 초기 비용:</h3>
+              <span className="text-lg font-bold">{formatNumber(taxResult.totalCost)}원</span>
+            </div>
             <p className="text-sm">- 취득세: {formatNumber(taxResult.acquisitionTax)}원</p>
             <p className="text-sm">- 지방교육세: {formatNumber(taxResult.educationTax)}원</p>
             <p className="text-sm">- 인지세: {formatNumber(taxResult.stampDuty)}원</p>
