@@ -3,6 +3,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import SubscriptionCalculator from "@/components/SubscriptionCalculator";
 import ScoreResults from "@/components/ScoreResults";
 import AreaCalculator from "@/components/AreaCalculator";
+import TaxCalculator from "@/components/TaxCalculator";
 import { CalculatedScore } from "@/lib/calculator";
 
 export default function Home() {
@@ -33,9 +34,10 @@ export default function Home() {
           onValueChange={setActiveTab}
           className="w-full"
         >
-          <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 mb-8">
+          <TabsList className="grid w-full max-w-xl mx-auto grid-cols-3 mb-8">
             <TabsTrigger value="subscription">청약 점수 계산기</TabsTrigger>
             <TabsTrigger value="area">평수 계산기</TabsTrigger>
+            <TabsTrigger value="tax">취득세 계산기</TabsTrigger>
           </TabsList>
 
           {/* Subscription Calculator Tab */}
@@ -52,6 +54,13 @@ export default function Home() {
               <AreaCalculator />
             </div>
           </TabsContent>
+
+          {/* Tax Calculator Tab */}
+          <TabsContent value="tax">
+            <div className="max-w-lg mx-auto">
+              <TaxCalculator />
+            </div>
+          </TabsContent>
         </Tabs>
       </main>
 
@@ -60,7 +69,7 @@ export default function Home() {
           <div className="flex flex-col md:flex-row justify-between">
             <div className="mb-8 md:mb-0">
               <h3 className="text-xl font-bold mb-4">부동산 계산기</h3>
-              <p className="text-gray-400 max-w-md">본 서비스는 한국 주택 청약 제도에 따른 점수 계산과 평수 환산을 돕는 서비스입니다.</p>
+              <p className="text-gray-400 max-w-md">본 서비스는 한국 주택 청약 제도에 따른 점수 계산, 평수 환산, 취득세 계산을 돕는 서비스입니다.</p>
             </div>
             
             <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
@@ -69,6 +78,7 @@ export default function Home() {
                 <ul className="space-y-2">
                   <li><a href="#" className="text-gray-400 hover:text-white transition">청약 점수 계산</a></li>
                   <li><a href="#" className="text-gray-400 hover:text-white transition">평수 계산기</a></li>
+                  <li><a href="#" className="text-gray-400 hover:text-white transition">취득세 계산기</a></li>
                   <li><a href="#" className="text-gray-400 hover:text-white transition">부동산 뉴스</a></li>
                   <li><a href="#" className="text-gray-400 hover:text-white transition">자주 묻는 질문</a></li>
                 </ul>
