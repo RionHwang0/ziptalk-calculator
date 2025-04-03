@@ -16,6 +16,21 @@ interface TaxResult {
   registrationFee: number;
 }
 
+// 중개수수료 요율 계산 함수
+function getBrokerageFeeRate(price: number): number {
+  if (price < 50000000) return 0.006;
+  if (price < 200000000) return 0.005;
+  if (price < 600000000) return 0.004;
+  if (price < 900000000) return 0.005;
+  return 0.009; // 9억 초과는 협의 요율 최대치
+}
+
+// 중개수수료 계산 함수
+function getBrokerageFee(price: number): number {
+  const rate = getBrokerageFeeRate(price);
+  return Math.floor(price * rate);
+}
+
 export default function TaxCalculator() {
   const [price, setPrice] = useState<string>("");
   const [houseCount, setHouseCount] = useState<string>("1");
@@ -54,8 +69,10 @@ export default function TaxCalculator() {
     const acquisitionTax = Math.floor(priceInWon * taxRate);
     const educationTax = Math.floor(acquisitionTax * 0.1);
     const stampDuty = priceInWon > 1000000000 ? 350000 : 150000;
-    const brokerageRate = priceInWon > 900000000 ? 0.009 : (priceInWon > 600000000 ? 0.005 : 0.004);
-    const brokerageFee = Math.floor(priceInWon * brokerageRate);
+    
+    // 새로운 중개수수료 계산 함수 사용
+    const brokerageFee = getBrokerageFee(priceInWon);
+    
     const registrationFee = 300000;
 
     const totalCost = acquisitionTax + educationTax + stampDuty + brokerageFee + registrationFee;
@@ -146,6 +163,7 @@ export default function TaxCalculator() {
             <p className="text-sm">- 인지세: {formatNumber(taxResult.stampDuty)}원</p>
             <p className="text-sm">- 중개수수료: {formatNumber(taxResult.brokerageFee)}원</p>
             <p className="text-sm">- 등기비용: {formatNumber(taxResult.registrationFee)}원</p>
+            <p className="text-xs text-gray-500 mt-2">※ 9억 원 초과 주택의 경우, 중개보수 요율은 0.4% ~ 0.9% 범위 내에서 중개인과 협의가 필요합니다.</p>
           </div>
         )}
 
@@ -158,6 +176,17 @@ export default function TaxCalculator() {
             <li>• 9억원 초과 : 3%</li>
             <li>• 지방교육세는 취득세의 10%가 적용됩니다</li>
             <li>• 등기비용은 대략적인 금액이며 실제와 차이가 있을 수 있습니다</li>
+          </ul>
+        </div>
+        
+        <div className="mt-4 p-4 bg-[#F8F9FA] rounded-lg">
+          <h3 className="text-sm font-medium mb-2">중개수수료 안내</h3>
+          <ul className="text-sm text-gray-600 space-y-1">
+            <li>• 5천만원 미만 : 0.6%</li>
+            <li>• 5천만원 이상 ~ 2억원 미만 : 0.5%</li>
+            <li>• 2억원 이상 ~ 6억원 미만 : 0.4%</li>
+            <li>• 6억원 이상 ~ 9억원 미만 : 0.5%</li>
+            <li>• 9억원 이상 : 0.9% (협의가능)</li>
           </ul>
         </div>
       </CardContent>
