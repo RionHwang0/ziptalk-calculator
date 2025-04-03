@@ -157,10 +157,7 @@ export default function TaxCalculator() {
         
         {taxResult && (
           <div className="mt-8 p-4 bg-[#F5F6F7] rounded-lg space-y-2">
-            <div className="flex justify-between items-center mb-3">
-              <h3 className="text-lg font-bold">총 예상 초기 비용:</h3>
-              <span className="text-lg font-bold">{formatNumber(taxResult.totalCost)}원</span>
-            </div>
+            <h3 className="text-lg font-bold mb-3">총 예상 초기 비용: {formatNumber(taxResult.totalCost)}원</h3>
             <p className="text-sm">- 취득세: {formatNumber(taxResult.acquisitionTax)}원</p>
             <p className="text-sm">- 지방교육세: {formatNumber(taxResult.educationTax)}원</p>
             <p className="text-sm">- 인지세: {formatNumber(taxResult.stampDuty)}원</p>
@@ -183,7 +180,7 @@ export default function TaxCalculator() {
         </div>
         
         <div className="mt-4 p-4 bg-[#F8F9FA] rounded-lg">
-          <h3 className="text-sm font-medium mb-2">중개수수료 안내(상한)</h3>
+          <h3 className="text-sm font-medium mb-2">중개수수료 안내</h3>
           <ul className="text-sm text-gray-600 space-y-1">
             <li>• 5천만원 미만 : 0.6%</li>
             <li>• 5천만원 이상 ~ 2억원 미만 : 0.5%</li>
