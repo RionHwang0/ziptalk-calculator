@@ -31,6 +31,17 @@ function getBrokerageFee(price: number): number {
   return Math.floor(price * rate);
 }
 
+// 인지세 계산 함수
+function getStampTax(price: number): number {
+  if (price <= 100000000) {
+    return 50000;
+  } else if (price <= 1000000000) {
+    return 150000;
+  } else {
+    return 350000;
+  }
+}
+
 export default function TaxCalculator() {
   const [price, setPrice] = useState<string>("");
   const [houseCount, setHouseCount] = useState<string>("1");
@@ -68,9 +79,10 @@ export default function TaxCalculator() {
 
     const acquisitionTax = Math.floor(priceInWon * taxRate);
     const educationTax = Math.floor(acquisitionTax * 0.1);
-    const stampDuty = priceInWon > 1000000000 ? 350000 : 150000;
+    // 새로운 인지세 계산 함수 사용
+    const stampDuty = getStampTax(priceInWon);
     
-    // 새로운 중개수수료 계산 함수 사용
+    // 중개수수료 계산 함수 사용
     const brokerageFee = getBrokerageFee(priceInWon);
     
     const registrationFee = 300000;
@@ -164,6 +176,7 @@ export default function TaxCalculator() {
             <p className="text-sm">- 중개수수료: {formatNumber(taxResult.brokerageFee)}원</p>
             <p className="text-sm">- 등기비용: {formatNumber(taxResult.registrationFee)}원</p>
             <p className="text-xs text-gray-500 mt-2">※ 9억 원 초과 주택의 경우, 중개보수 요율은 0.4% ~ 0.9% 범위 내에서 중개인과 협의가 필요합니다.</p>
+            <p className="text-xs text-gray-500">※ 인지세는 계약금액에 따라 정해진 금액으로, 매수인과 매도인이 반씩 부담하는 것이 일반적입니다.</p>
           </div>
         )}
 
@@ -180,13 +193,23 @@ export default function TaxCalculator() {
         </div>
         
         <div className="mt-4 p-4 bg-[#F8F9FA] rounded-lg">
-          <h3 className="text-sm font-medium mb-2">중개수수료 안내</h3>
+          <h3 className="text-sm font-medium mb-2">중개수수료 안내(상한)</h3>
           <ul className="text-sm text-gray-600 space-y-1">
             <li>• 5천만원 미만 : 0.6%</li>
             <li>• 5천만원 이상 ~ 2억원 미만 : 0.5%</li>
             <li>• 2억원 이상 ~ 6억원 미만 : 0.4%</li>
             <li>• 6억원 이상 ~ 9억원 미만 : 0.5%</li>
             <li>• 9억원 이상 : 0.9% (협의가능)</li>
+          </ul>
+        </div>
+        
+        <div className="mt-4 p-4 bg-[#F8F9FA] rounded-lg">
+          <h3 className="text-sm font-medium mb-2">인지세 안내</h3>
+          <ul className="text-sm text-gray-600 space-y-1">
+            <li>• 1억원 이하 : 5만원</li>
+            <li>• 1억원 초과 ~ 10억원 이하 : 15만원</li>
+            <li>• 10억원 초과 : 35만원</li>
+            <li>• 매수인과 매도인이 각각 50%씩 부담하는 것이 일반적입니다</li>
           </ul>
         </div>
       </CardContent>
