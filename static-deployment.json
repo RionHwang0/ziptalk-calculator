@@ -1,9 +1,10 @@
 {
   "build": {
-    "beforeBuild": "npm run build"
+    "command": "vite build --config vite.static.config.ts",
+    "directory": "dist"
   },
-  "singlePage": false,
-  "artifacts": {
-    "publicDirectory": "public"
-  }
+  "publicDir": "dist",
+  "rewrites": [
+    { "source": "/*", "destination": "/index.html" }
+  ]
 }
