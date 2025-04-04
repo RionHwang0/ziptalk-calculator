@@ -67,21 +67,21 @@ export default function SubscriptionCalculator({ onCalculate }: SubscriptionCalc
           <div className="form-group">
             <Label htmlFor="age" className="block text-sm font-medium mb-2">나이</Label>
             <Select value={formData.age} onValueChange={(value) => handleChange("age", value)}>
-              <SelectTrigger className="w-full p-3 border rounded-lg">
-                <SelectValue placeholder="나이 선택" />
+              <SelectTrigger className="w-full p-3 border rounded-lg bg-white">
+                <SelectValue placeholder="나이 선택" className="text-gray-900" />
               </SelectTrigger>
-              <SelectContent className="max-h-[15rem] overflow-y-auto">
-                <SelectItem value="19">19세 미만</SelectItem>
-                <SelectItem value="20">20-24세</SelectItem>
-                <SelectItem value="25">25-29세</SelectItem>
-                <SelectItem value="30">30-34세</SelectItem>
-                <SelectItem value="35">35-39세</SelectItem>
-                <SelectItem value="40">40-44세</SelectItem>
-                <SelectItem value="45">45-49세</SelectItem>
-                <SelectItem value="50">50-54세</SelectItem>
-                <SelectItem value="55">55-59세</SelectItem>
-                <SelectItem value="60">60-64세</SelectItem>
-                <SelectItem value="65">65세 이상</SelectItem>
+              <SelectContent className="max-h-[15rem] overflow-y-auto bg-white z-50">
+                <SelectItem value="19" className="bg-white hover:bg-gray-100">19세 미만</SelectItem>
+                <SelectItem value="20" className="bg-white hover:bg-gray-100">20-24세</SelectItem>
+                <SelectItem value="25" className="bg-white hover:bg-gray-100">25-29세</SelectItem>
+                <SelectItem value="30" className="bg-white hover:bg-gray-100">30-34세</SelectItem>
+                <SelectItem value="35" className="bg-white hover:bg-gray-100">35-39세</SelectItem>
+                <SelectItem value="40" className="bg-white hover:bg-gray-100">40-44세</SelectItem>
+                <SelectItem value="45" className="bg-white hover:bg-gray-100">45-49세</SelectItem>
+                <SelectItem value="50" className="bg-white hover:bg-gray-100">50-54세</SelectItem>
+                <SelectItem value="55" className="bg-white hover:bg-gray-100">55-59세</SelectItem>
+                <SelectItem value="60" className="bg-white hover:bg-gray-100">60-64세</SelectItem>
+                <SelectItem value="65" className="bg-white hover:bg-gray-100">65세 이상</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -90,21 +90,21 @@ export default function SubscriptionCalculator({ onCalculate }: SubscriptionCalc
           <div className="form-group">
             <Label htmlFor="noHomePeriod" className="block text-sm font-medium mb-2">무주택 기간</Label>
             <Select value={formData.noHomePeriod} onValueChange={(value) => handleChange("noHomePeriod", value)}>
-              <SelectTrigger className="w-full p-3 border rounded-lg">
-                <SelectValue placeholder="무주택 기간 선택" />
+              <SelectTrigger className="w-full p-3 border rounded-lg bg-white">
+                <SelectValue placeholder="무주택 기간 선택" className="text-gray-900" />
               </SelectTrigger>
-              <SelectContent className="max-h-[15rem] overflow-y-auto">
-                <SelectItem value="0">없음</SelectItem>
-                <SelectItem value="1">1년 미만</SelectItem>
-                <SelectItem value="2">1-2년</SelectItem>
-                <SelectItem value="3">2-3년</SelectItem>
-                <SelectItem value="4">3-4년</SelectItem>
-                <SelectItem value="5">4-5년</SelectItem>
-                <SelectItem value="8">5-8년</SelectItem>
-                <SelectItem value="10">8-10년</SelectItem>
-                <SelectItem value="12">10-12년</SelectItem>
-                <SelectItem value="15">12-15년</SelectItem>
-                <SelectItem value="20">15년 이상</SelectItem>
+              <SelectContent className="max-h-[15rem] overflow-y-auto bg-white z-50">
+                <SelectItem value="0" className="bg-white hover:bg-gray-100">없음</SelectItem>
+                <SelectItem value="1" className="bg-white hover:bg-gray-100">1년 미만</SelectItem>
+                <SelectItem value="2" className="bg-white hover:bg-gray-100">1-2년</SelectItem>
+                <SelectItem value="3" className="bg-white hover:bg-gray-100">2-3년</SelectItem>
+                <SelectItem value="4" className="bg-white hover:bg-gray-100">3-4년</SelectItem>
+                <SelectItem value="5" className="bg-white hover:bg-gray-100">4-5년</SelectItem>
+                <SelectItem value="8" className="bg-white hover:bg-gray-100">5-8년</SelectItem>
+                <SelectItem value="10" className="bg-white hover:bg-gray-100">8-10년</SelectItem>
+                <SelectItem value="12" className="bg-white hover:bg-gray-100">10-12년</SelectItem>
+                <SelectItem value="15" className="bg-white hover:bg-gray-100">12-15년</SelectItem>
+                <SelectItem value="20" className="bg-white hover:bg-gray-100">15년 이상</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -113,17 +113,17 @@ export default function SubscriptionCalculator({ onCalculate }: SubscriptionCalc
           <div className="form-group">
             <Label htmlFor="dependents" className="block text-sm font-medium mb-2">부양 가족 수</Label>
             <Select value={formData.dependents} onValueChange={(value) => handleChange("dependents", value)}>
-              <SelectTrigger className="w-full p-3 border rounded-lg">
-                <SelectValue placeholder="부양 가족 수 선택" />
+              <SelectTrigger className="w-full p-3 border rounded-lg bg-white">
+                <SelectValue placeholder="부양 가족 수 선택" className="text-gray-900" />
               </SelectTrigger>
-              <SelectContent className="max-h-[15rem] overflow-y-auto">
-                <SelectItem value="0">없음</SelectItem>
-                <SelectItem value="1">1명</SelectItem>
-                <SelectItem value="2">2명</SelectItem>
-                <SelectItem value="3">3명</SelectItem>
-                <SelectItem value="4">4명</SelectItem>
-                <SelectItem value="5">5명</SelectItem>
-                <SelectItem value="6">6명 이상</SelectItem>
+              <SelectContent className="max-h-[15rem] overflow-y-auto bg-white z-50">
+                <SelectItem value="0" className="bg-white hover:bg-gray-100">없음</SelectItem>
+                <SelectItem value="1" className="bg-white hover:bg-gray-100">1명</SelectItem>
+                <SelectItem value="2" className="bg-white hover:bg-gray-100">2명</SelectItem>
+                <SelectItem value="3" className="bg-white hover:bg-gray-100">3명</SelectItem>
+                <SelectItem value="4" className="bg-white hover:bg-gray-100">4명</SelectItem>
+                <SelectItem value="5" className="bg-white hover:bg-gray-100">5명</SelectItem>
+                <SelectItem value="6" className="bg-white hover:bg-gray-100">6명 이상</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -132,23 +132,23 @@ export default function SubscriptionCalculator({ onCalculate }: SubscriptionCalc
           <div className="form-group">
             <Label htmlFor="subscriptionPeriod" className="block text-sm font-medium mb-2">청약 통장 가입 기간</Label>
             <Select value={formData.subscriptionPeriod} onValueChange={(value) => handleChange("subscriptionPeriod", value)}>
-              <SelectTrigger className="w-full p-3 border rounded-lg">
-                <SelectValue placeholder="가입 기간 선택" />
+              <SelectTrigger className="w-full p-3 border rounded-lg bg-white">
+                <SelectValue placeholder="가입 기간 선택" className="text-gray-900" />
               </SelectTrigger>
-              <SelectContent className="max-h-[15rem] overflow-y-auto">
-                <SelectItem value="0">없음</SelectItem>
-                <SelectItem value="1">1년 미만</SelectItem>
-                <SelectItem value="2">1-2년</SelectItem>
-                <SelectItem value="3">2-3년</SelectItem>
-                <SelectItem value="4">3-4년</SelectItem>
-                <SelectItem value="5">4-5년</SelectItem>
-                <SelectItem value="6">5-6년</SelectItem>
-                <SelectItem value="7">6-7년</SelectItem>
-                <SelectItem value="8">7-8년</SelectItem>
-                <SelectItem value="9">8-9년</SelectItem>
-                <SelectItem value="10">9-10년</SelectItem>
-                <SelectItem value="15">10-15년</SelectItem>
-                <SelectItem value="20">15년 이상</SelectItem>
+              <SelectContent className="max-h-[15rem] overflow-y-auto bg-white z-50">
+                <SelectItem value="0" className="bg-white hover:bg-gray-100">없음</SelectItem>
+                <SelectItem value="1" className="bg-white hover:bg-gray-100">1년 미만</SelectItem>
+                <SelectItem value="2" className="bg-white hover:bg-gray-100">1-2년</SelectItem>
+                <SelectItem value="3" className="bg-white hover:bg-gray-100">2-3년</SelectItem>
+                <SelectItem value="4" className="bg-white hover:bg-gray-100">3-4년</SelectItem>
+                <SelectItem value="5" className="bg-white hover:bg-gray-100">4-5년</SelectItem>
+                <SelectItem value="6" className="bg-white hover:bg-gray-100">5-6년</SelectItem>
+                <SelectItem value="7" className="bg-white hover:bg-gray-100">6-7년</SelectItem>
+                <SelectItem value="8" className="bg-white hover:bg-gray-100">7-8년</SelectItem>
+                <SelectItem value="9" className="bg-white hover:bg-gray-100">8-9년</SelectItem>
+                <SelectItem value="10" className="bg-white hover:bg-gray-100">9-10년</SelectItem>
+                <SelectItem value="15" className="bg-white hover:bg-gray-100">10-15년</SelectItem>
+                <SelectItem value="20" className="bg-white hover:bg-gray-100">15년 이상</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -157,17 +157,17 @@ export default function SubscriptionCalculator({ onCalculate }: SubscriptionCalc
           <div className="form-group">
             <Label htmlFor="income" className="block text-sm font-medium mb-2">연간 소득</Label>
             <Select value={formData.income} onValueChange={(value) => handleChange("income", value)}>
-              <SelectTrigger className="w-full p-3 border rounded-lg">
-                <SelectValue placeholder="연간 소득 선택" />
+              <SelectTrigger className="w-full p-3 border rounded-lg bg-white">
+                <SelectValue placeholder="연간 소득 선택" className="text-gray-900" />
               </SelectTrigger>
-              <SelectContent className="max-h-[15rem] overflow-y-auto">
-                <SelectItem value="1000">1,000만원 미만</SelectItem>
-                <SelectItem value="2000">1,000-2,000만원</SelectItem>
-                <SelectItem value="3000">2,000-3,000만원</SelectItem>
-                <SelectItem value="4000">3,000-4,000만원</SelectItem>
-                <SelectItem value="5000">4,000-5,000만원</SelectItem>
-                <SelectItem value="6000">5,000-6,000만원</SelectItem>
-                <SelectItem value="7000">6,000만원 이상</SelectItem>
+              <SelectContent className="max-h-[15rem] overflow-y-auto bg-white z-50">
+                <SelectItem value="1000" className="bg-white hover:bg-gray-100">1,000만원 미만</SelectItem>
+                <SelectItem value="2000" className="bg-white hover:bg-gray-100">1,000-2,000만원</SelectItem>
+                <SelectItem value="3000" className="bg-white hover:bg-gray-100">2,000-3,000만원</SelectItem>
+                <SelectItem value="4000" className="bg-white hover:bg-gray-100">3,000-4,000만원</SelectItem>
+                <SelectItem value="5000" className="bg-white hover:bg-gray-100">4,000-5,000만원</SelectItem>
+                <SelectItem value="6000" className="bg-white hover:bg-gray-100">5,000-6,000만원</SelectItem>
+                <SelectItem value="7000" className="bg-white hover:bg-gray-100">6,000만원 이상</SelectItem>
               </SelectContent>
             </Select>
           </div>
