@@ -5,6 +5,7 @@ import ScoreResults from "@/components/ScoreResults";
 import AreaCalculator from "@/components/AreaCalculator";
 import TaxCalculator from "@/components/TaxCalculator";
 import HoldingTaxCalculator from "@/components/HoldingTaxCalculator";
+import AdSenseAd from "@/components/AdSenseAd";
 import { CalculatedScore } from "@/lib/calculator";
 
 export default function Home() {
@@ -46,6 +47,12 @@ export default function Home() {
           <TabsContent value="subscription">
             <div className="max-w-lg mx-auto">
               <SubscriptionCalculator onCalculate={setCalculatedScore} />
+              
+              {/* 계산기와 결과 사이 광고 */}
+              <div className="my-6">
+                <AdSenseAd slot="1234567890" format="auto" style={{ height: "250px" }} />
+              </div>
+              
               {calculatedScore && <ScoreResults score={calculatedScore} />}
             </div>
           </TabsContent>
@@ -54,6 +61,11 @@ export default function Home() {
           <TabsContent value="area">
             <div className="max-w-lg mx-auto">
               <AreaCalculator />
+              
+              {/* 평수 계산기 아래 광고 */}
+              <div className="mt-6">
+                <AdSenseAd slot="2345678901" format="auto" style={{ height: "250px" }} />
+              </div>
             </div>
           </TabsContent>
 
@@ -61,6 +73,11 @@ export default function Home() {
           <TabsContent value="tax">
             <div className="max-w-lg mx-auto">
               <TaxCalculator />
+              
+              {/* 취득세 계산기 아래 광고 */}
+              <div className="mt-6">
+                <AdSenseAd slot="3456789012" format="auto" style={{ height: "250px" }} />
+              </div>
             </div>
           </TabsContent>
           
@@ -68,6 +85,11 @@ export default function Home() {
           <TabsContent value="holdingtax">
             <div className="max-w-lg mx-auto">
               <HoldingTaxCalculator />
+              
+              {/* 보유세 계산기 아래 광고 */}
+              <div className="mt-6">
+                <AdSenseAd slot="4567890123" format="auto" style={{ height: "250px" }} />
+              </div>
             </div>
           </TabsContent>
         </Tabs>
@@ -114,7 +136,12 @@ export default function Home() {
             </div>
           </div>
           
-          <div className="border-t border-gray-700 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+          {/* 푸터 광고 영역 */}
+          <div className="mt-8 py-6">
+            <AdSenseAd slot="5678901234" format="horizontal" style={{ height: "120px" }} />
+          </div>
+          
+          <div className="border-t border-gray-700 mt-4 pt-8 flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-400 text-sm mb-4 md:mb-0">© {new Date().getFullYear()} 부동산 계산기. All rights reserved.</p>
           </div>
         </div>

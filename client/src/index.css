@@ -33,3 +33,45 @@
 .select-fix [data-radix-select-item]:hover {
   background-color: #f3f4f6 !important;
 }
+
+/* 배포 환경에서의 추가 스타일 */
+[data-radix-select-trigger] {
+  background-color: white !important;
+}
+
+[data-radix-select-trigger] [data-radix-select-value] {
+  color: black !important;
+}
+
+[data-radix-select-content] {
+  background-color: white !important;
+  z-index: 100 !important;
+}
+
+[data-radix-select-item] {
+  background-color: white !important;
+}
+
+[data-radix-select-item]:hover {
+  background-color: #f3f4f6 !important;
+}
+
+/* Select 컴포넌트 전역 스타일 강화 */
+.radix-select-trigger, 
+[data-component="select-trigger"],
+.select-trigger {
+  background-color: white !important;
+}
+
+.radix-select-value, 
+[data-component="select-value"],
+.select-value {
+  color: black !important;
+}
+
+.radix-select-content, 
+[data-component="select-content"],
+.select-content {
+  background-color: white !important;
+  z-index: 9999 !important;
+}
