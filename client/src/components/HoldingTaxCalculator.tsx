@@ -94,15 +94,15 @@ export default function HoldingTaxCalculator() {
             />
           </div>
           
-          <div className="form-group">
+          <div className="form-group select-fix">
             <Label htmlFor="houseCount" className="block text-sm font-medium mb-2">주택 수</Label>
             <Select value={houseCount} onValueChange={setHouseCount}>
-              <SelectTrigger className="w-full p-3 border rounded-lg bg-white">
-                <SelectValue placeholder="주택 수 선택" className="text-gray-900" />
+              <SelectTrigger className="w-full p-3 border rounded-lg">
+                <SelectValue placeholder="주택 수 선택" />
               </SelectTrigger>
-              <SelectContent className="bg-white z-50">
-                <SelectItem value="1" className="bg-white hover:bg-gray-100">1주택</SelectItem>
-                <SelectItem value="2" className="bg-white hover:bg-gray-100">2주택 이상</SelectItem>
+              <SelectContent>
+                <SelectItem value="1">1주택</SelectItem>
+                <SelectItem value="2">2주택 이상</SelectItem>
               </SelectContent>
             </Select>
           </div>
