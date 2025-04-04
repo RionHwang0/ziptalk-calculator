@@ -1,0 +1,9 @@
+{
+  "build": {
+    "beforeBuild": "npm run build"
+  },
+  "singlePage": false,
+  "artifacts": {
+    "publicDirectory": "public"
+  }
+}
