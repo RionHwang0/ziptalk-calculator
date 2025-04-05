@@ -24,29 +24,51 @@ export default function AreaCalculator() {
   // 결과 계산 처리
   const handleCalculate = () => {
     try {
+      console.log("계산 시작, 현재 탭:", activeTab);
+      console.log("평수 값:", pyeongValue);
+      console.log("제곱미터 값:", squareMeterValue);
+      
       if (activeTab === "pyeongToMeter" && pyeongValue) {
         const pyeong = parseFloat(pyeongValue);
+        console.log("변환할 평수:", pyeong);
+        
         if (!isNaN(pyeong)) {
           const squareMeter = convertPyeongToSquareMeter(pyeong);
+          console.log("변환된 제곱미터:", squareMeter);
+          
           setResult({
             value: Math.round(squareMeter * 100) / 100, // 소수점 2자리까지
             unit: "제곱미터 (m²)"
           });
           setSquareMeterValue(squareMeter.toFixed(2));
+        } else {
+          console.error("유효하지 않은 평수 값");
+          alert("유효한 숫자를 입력해주세요.");
         }
       } else if (activeTab === "meterToPyeong" && squareMeterValue) {
         const squareMeter = parseFloat(squareMeterValue);
+        console.log("변환할 제곱미터:", squareMeter);
+        
         if (!isNaN(squareMeter)) {
           const pyeong = convertSquareMeterToPyeong(squareMeter);
+          console.log("변환된 평수:", pyeong);
+          
           setResult({
             value: Math.round(pyeong * 100) / 100, // 소수점 2자리까지
             unit: "평"
           });
           setPyeongValue(pyeong.toFixed(2));
+        } else {
+          console.error("유효하지 않은 제곱미터 값");
+          alert("유효한 숫자를 입력해주세요.");
         }
+      } else {
+        console.error("입력값이 없음");
+        alert("변환할 값을 입력해주세요.");
       }
     } catch (error) {
       console.error("계산 중 오류 발생:", error);
+      alert("계산 중 오류가 발생했습니다.");
     }
   };
   
@@ -59,6 +81,15 @@ export default function AreaCalculator() {
     // 값 초기화
     setPyeongValue("");
     setSquareMeterValue("");
+    setResult(null);
+  };
+  
+  // 탭 변경 처리
+  const handleTabChange = (value: string) => {
+    console.log("탭 변경:", value);
+    setActiveTab(value);
+    
+    // 결과 초기화
     setResult(null);
   };
   
@@ -97,7 +128,7 @@ export default function AreaCalculator() {
         
         <Tabs 
           value={activeTab} 
-          onValueChange={setActiveTab}
+          onValueChange={handleTabChange}
           className="w-full"
         >
           <TabsList className="grid w-full grid-cols-2 mb-6">
@@ -149,16 +180,12 @@ export default function AreaCalculator() {
           {result && (
             <div className="mt-8 p-4 bg-[#F5F6F7] rounded-lg">
               <h3 className="text-lg font-medium mb-2">변환 결과</h3>
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-gray-500">
-                    {activeTab === "pyeongToMeter" ? `${pyeongValue} 평` : `${squareMeterValue} m²`}
-                  </p>
-                </div>
-                <ArrowRight className="text-gray-400 mx-4" />
-                <div>
-                  <p className="text-xl font-bold">{result.value} {result.unit}</p>
-                </div>
+              <div className="flex flex-col items-center justify-center">
+                <p className="text-sm text-gray-500 mb-2">
+                  {activeTab === "pyeongToMeter" ? `${pyeongValue} 평` : `${squareMeterValue} m²`}
+                </p>
+                <ArrowRight className="text-gray-400 mx-4 mb-2" />
+                <p className="text-xl font-bold">{result.value} {result.unit}</p>
               </div>
             </div>
           )}
