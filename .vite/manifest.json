@@ -1,11 +1,11 @@
 {
   "client/src/main.tsx": {
-    "file": "assets/main.e61nCATw.js",
+    "file": "assets/main.js",
     "name": "main",
     "src": "client/src/main.tsx",
     "isEntry": true,
     "css": [
-      "assets/main.DwzUJ7Xr.css"
+      "assets/main.css"
     ]
   }
 }

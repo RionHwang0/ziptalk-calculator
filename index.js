@@ -464,20 +464,9 @@ var vite_config_default = defineConfig({
         main: path2.resolve(__dirname, "client/src/main.tsx")
       },
       output: {
-        entryFileNames: "assets/[name].[hash].js",
-        chunkFileNames: "assets/[name].[hash].js",
-        assetFileNames: (assetInfo) => {
-          if (!assetInfo || !assetInfo.name) return "assets/[name].[hash][extname]";
-          const info = assetInfo.name.split(".");
-          const ext = info[info.length - 1];
-          if (/\.(png|jpe?g|gif|svg|ico|webp)$/.test(assetInfo.name)) {
-            return "assets/images/[name].[hash][extname]";
-          }
-          if (/\.css$/.test(assetInfo.name)) {
-            return "assets/[name].[hash][extname]";
-          }
-          return "assets/[name].[hash][extname]";
-        }
+        entryFileNames: "assets/[name].js",
+        chunkFileNames: "assets/[name].js",
+        assetFileNames: "assets/[name][extname]"
       }
     }
   },
