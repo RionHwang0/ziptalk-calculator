@@ -57,17 +57,14 @@ export default function AreaCalculator() {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, field: 'pyeong' | 'squareMeter') => {
     const value = e.target.value;
     
-    // 숫자와 소수점만 허용
-    if (value === '' || /^\d*\.?\d*$/.test(value)) {
-      if (field === 'pyeong') {
-        setPyeongValue(value);
-      } else {
-        setSquareMeterValue(value);
-      }
-      
-      // 결과 초기화
-      setResult(null);
+    if (field === 'pyeong') {
+      setPyeongValue(value);
+    } else {
+      setSquareMeterValue(value);
     }
+    
+    // 결과 초기화
+    setResult(null);
   };
 
   return (
@@ -131,7 +128,7 @@ export default function AreaCalculator() {
           <div className="mt-6">
             <Button 
               onClick={handleCalculate} 
-              className="w-full py-3 px-4 bg-[#FEE500] text-[#333333] font-medium rounded-lg hover:shadow-md transition duration-200"
+              className="w-full py-3 px-4 text-black font-medium rounded-lg hover:shadow-md transition duration-200"
             >
               변환하기
             </Button>
