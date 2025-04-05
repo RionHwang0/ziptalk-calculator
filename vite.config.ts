@@ -27,13 +27,15 @@ export default defineConfig({
     emptyOutDir: true,
     rollupOptions: {
       input: {
-        main: path.resolve(__dirname, "client/src/main.tsx"),
+        main: path.resolve(__dirname, "public", "index.html"),
       },
       output: {
-        entryFileNames: 'main.js'
+        entryFileNames: `assets/[name].[hash].js`,
+        chunkFileNames: `assets/[name].[hash].js`,
+        assetFileNames: `assets/[name].[hash].[ext]`
       }
     }
   },
   publicDir: "public",
 });
-    
+     
