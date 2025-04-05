@@ -26,9 +26,7 @@ export default defineConfig({
     outDir: "dist",
     emptyOutDir: true,
     rollupOptions: {
-      input: {
-        main: path.resolve(__dirname, "public", "index.html"),
-      },
+      input: path.resolve(__dirname, "client/src/main.tsx"),
       output: {
         entryFileNames: `assets/[name].js`,
         chunkFileNames: `assets/[name].[hash].js`,
