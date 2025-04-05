@@ -8,6 +8,9 @@ import Admin from "@/pages/Admin";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
 
+// GitHub Pages의 base URL을 설정
+const base = '/ziptalk-calculator';
+
 function Router() {
   // 세션 스토리지에서 인증 상태 확인
   const isAuth = sessionStorage.getItem('isAdminAuthenticated') === 'true';
@@ -17,7 +20,7 @@ function Router() {
   const ProtectedAdminRoute = () => {
     useEffect(() => {
       if (!isAuth) {
-        navigate('/');
+        navigate(base + '/');
         alert('관리자 페이지에 접근 권한이 없습니다.');
       }
     }, []);
@@ -26,7 +29,7 @@ function Router() {
   };
   
   return (
-    <Switch>
+    <Switch base={base}>
       <Route path="/" component={Home} />
       <Route path="/admin" component={ProtectedAdminRoute} />
       <Route component={NotFound} />
@@ -52,7 +55,7 @@ function Header() {
       sessionStorage.setItem('isAdminAuthenticated', 'true');
       setShowAuthModal(false);
       setShowAdminButton(true);
-      navigate("/admin");
+      navigate(base + "/admin");
     } else {
       alert("비밀번호가 일치하지 않습니다.");
     }
@@ -85,19 +88,19 @@ function Header() {
     if (!isAuthenticated) {
       setShowAuthModal(true);
     } else {
-      navigate("/admin");
+      navigate(base + "/admin");
     }
   };
 
   return (
     <header className="bg-yellow-500 text-white py-4">
       <div className="container mx-auto flex justify-between items-center px-4">
-        <Link href="/">
+        <Link href={base + "/"}>
           <h1 className="text-xl font-bold cursor-pointer">부동산 계산기</h1>
         </Link>
         <nav>
           {showAdminButton && (
-            <a href="/admin" onClick={handleAdminClick}>
+            <a href={base + "/admin"} onClick={handleAdminClick}>
               <Button variant="secondary" className="bg-white text-yellow-600 hover:bg-gray-100">
                 관리자 페이지
               </Button>
@@ -138,6 +141,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <div className="min-h-screen flex flex-col">
+        <Header />
         <main className="flex-grow">
           <Router />
         </main>
