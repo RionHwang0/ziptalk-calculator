@@ -34,12 +34,7 @@ export default defineConfig({
       output: {
         entryFileNames: "assets/[name].js",
         chunkFileNames: "assets/[name].js",
-        assetFileNames: (assetInfo) => {
-          if (assetInfo.name === "index.css") {
-            return "client/src/index.css";
-          }
-          return "assets/[name][extname]";
-        }
+        assetFileNames: "assets/[name][extname]"
       }
     }
   },
