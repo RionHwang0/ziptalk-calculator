@@ -1,16 +1,11 @@
 {
-  "client/src/index.css": {
-    "file": "assets/styles.css",
-    "src": "client/src/index.css",
-    "isEntry": true
-  },
   "client/src/main.tsx": {
     "file": "assets/main.js",
     "name": "main",
     "src": "client/src/main.tsx",
     "isEntry": true,
     "css": [
-      "assets/styles.css"
+      "assets/main.css"
     ]
   }
 }
