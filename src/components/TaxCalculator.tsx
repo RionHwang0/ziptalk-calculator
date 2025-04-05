@@ -113,12 +113,11 @@ export default function TaxCalculator() {
             <Label htmlFor="price" className="block text-sm font-medium mb-2">매매가 (만원)</Label>
             <Input
               id="price"
-              type="number"
+              type="text"
               value={price}
               onChange={handlePriceChange}
               placeholder="예: 45000"
               className="w-full p-3 border rounded-lg"
-              step="any"
             />
           </div>
           

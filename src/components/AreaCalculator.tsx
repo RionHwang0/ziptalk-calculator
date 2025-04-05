@@ -143,12 +143,11 @@ export default function AreaCalculator() {
               <Label htmlFor="pyeong" className="block text-sm font-medium mb-2">평수 입력</Label>
               <Input
                 id="pyeong"
-                type="number"
+                type="text"
                 value={pyeongValue}
                 onChange={(e) => handleInputChange(e, 'pyeong')}
                 placeholder="변환할 평수를 입력하세요"
                 className="w-full p-3 border rounded-lg"
-                step="any"
               />
             </div>
           </TabsContent>
@@ -158,12 +157,11 @@ export default function AreaCalculator() {
               <Label htmlFor="squareMeter" className="block text-sm font-medium mb-2">제곱미터 입력</Label>
               <Input
                 id="squareMeter"
-                type="number"
+                type="text"
                 value={squareMeterValue}
                 onChange={(e) => handleInputChange(e, 'squareMeter')}
                 placeholder="변환할 제곱미터를 입력하세요"
                 className="w-full p-3 border rounded-lg"
-                step="any"
               />
             </div>
           </TabsContent>
