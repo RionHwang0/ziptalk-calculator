@@ -2,7 +2,7 @@ import { Route, Router, Switch } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { useLocation } from "wouter";
-import Calculator from "./pages/Calculator";
+import Home from "./pages/Home";
 import Header from "./components/Header";
 import "./index.css";
 
@@ -24,8 +24,8 @@ const App = () => {
         <div className="app">
           <Header />
           <Switch>
-            <Route path="/calculator" component={Calculator} />
-            <Route path="/" component={Calculator} />
+            <Route path="/calculator" component={Home} />
+            <Route path="/" component={Home} />
           </Switch>
         </div>
       </Router>
