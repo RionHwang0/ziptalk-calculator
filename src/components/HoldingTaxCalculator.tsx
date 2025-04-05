@@ -22,10 +22,8 @@ export default function HoldingTaxCalculator() {
 
   const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    // 숫자만 허용
-    if (value === "" || /^\d+$/.test(value)) {
-      setPublicPrice(value);
-    }
+    // 모든 입력 허용
+    setPublicPrice(value);
   };
 
   const calculateHoldingTax = () => {

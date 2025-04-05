@@ -24,26 +24,30 @@ export default function AreaCalculator() {
   
   // 결과 계산 처리
   const handleCalculate = () => {
-    if (activeTab === "pyeongToMeter" && pyeongValue) {
-      const pyeong = parseFloat(pyeongValue);
-      if (!isNaN(pyeong)) {
-        const squareMeter = convertPyeongToSquareMeter(pyeong);
-        setResult({
-          value: Math.round(squareMeter * 100) / 100, // 소수점 2자리까지
-          unit: "제곱미터 (m²)"
-        });
-        setSquareMeterValue(squareMeter.toFixed(2));
+    try {
+      if (activeTab === "pyeongToMeter" && pyeongValue) {
+        const pyeong = parseFloat(pyeongValue);
+        if (!isNaN(pyeong)) {
+          const squareMeter = convertPyeongToSquareMeter(pyeong);
+          setResult({
+            value: Math.round(squareMeter * 100) / 100, // 소수점 2자리까지
+            unit: "제곱미터 (m²)"
+          });
+          setSquareMeterValue(squareMeter.toFixed(2));
+        }
+      } else if (activeTab === "meterToPyeong" && squareMeterValue) {
+        const squareMeter = parseFloat(squareMeterValue);
+        if (!isNaN(squareMeter)) {
+          const pyeong = convertSquareMeterToPyeong(squareMeter);
+          setResult({
+            value: Math.round(pyeong * 100) / 100, // 소수점 2자리까지
+            unit: "평"
+          });
+          setPyeongValue(pyeong.toFixed(2));
+        }
       }
-    } else if (activeTab === "meterToPyeong" && squareMeterValue) {
-      const squareMeter = parseFloat(squareMeterValue);
-      if (!isNaN(squareMeter)) {
-        const pyeong = convertSquareMeterToPyeong(squareMeter);
-        setResult({
-          value: Math.round(pyeong * 100) / 100, // 소수점 2자리까지
-          unit: "평"
-        });
-        setPyeongValue(pyeong.toFixed(2));
-      }
+    } catch (error) {
+      console.error("계산 중 오류 발생:", error);
     }
   };
   

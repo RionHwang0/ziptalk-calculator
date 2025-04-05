@@ -51,10 +51,8 @@ export default function TaxCalculator() {
 
   const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    // 숫자만 허용
-    if (value === "" || /^\d+$/.test(value)) {
-      setPrice(value);
-    }
+    // 모든 입력 허용
+    setPrice(value);
   };
 
   const calculateTax = () => {
