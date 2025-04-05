@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Calculator as CalculatorIcon, ArrowRight, ArrowRightLeft } from "lucide-react";
@@ -87,15 +86,13 @@ export default function AreaCalculator() {
         </h2>
         
         <div className="flex justify-end mb-4">
-          <Button 
-            variant="outline" 
-            size="sm" 
+          <button 
             onClick={handleSwitch} 
-            className="flex items-center gap-1"
+            className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-[#FEE500] text-black hover:bg-[#E6CF00] h-10 w-full py-3 px-4 font-medium rounded-lg hover:shadow-md transition duration-200"
           >
             <ArrowRightLeft className="h-4 w-4" />
             <span>전환</span>
-          </Button>
+          </button>
         </div>
         
         <Tabs 
@@ -137,12 +134,15 @@ export default function AreaCalculator() {
           </TabsContent>
           
           <div className="mt-6">
-            <Button 
-              onClick={handleCalculate} 
-              className="w-full py-3 px-4 text-black font-medium rounded-lg hover:shadow-md transition duration-200"
+            <button 
+              onClick={() => {
+                console.log("변환하기 버튼 클릭됨");
+                handleCalculate();
+              }} 
+              className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-[#FEE500] text-black hover:bg-[#E6CF00] h-10 w-full py-3 px-4 font-medium rounded-lg hover:shadow-md transition duration-200"
             >
               변환하기
-            </Button>
+            </button>
           </div>
           
           {/* Result Display */}

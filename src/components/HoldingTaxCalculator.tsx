@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -127,12 +126,15 @@ export default function HoldingTaxCalculator() {
             </Label>
           </div>
           
-          <Button 
-            onClick={calculateHoldingTax} 
-            className="w-full py-3 px-4 bg-[#FEE500] text-[#333333] font-medium rounded-lg hover:shadow-md transition duration-200"
+          <button 
+            onClick={() => {
+              console.log("보유세 계산하기 버튼 클릭됨");
+              calculateHoldingTax();
+            }} 
+            className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-[#FEE500] text-black hover:bg-[#E6CF00] h-10 w-full py-3 px-4 font-medium rounded-lg hover:shadow-md transition duration-200"
           >
             계산하기
-          </Button>
+          </button>
         </div>
         
         {taxResult && (
