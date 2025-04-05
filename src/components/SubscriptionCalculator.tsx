@@ -55,7 +55,7 @@ export default function SubscriptionCalculator({ onCalculate }: SubscriptionCalc
   };
 
   return (
-    <Card className="bg-white rounded-xl shadow-md p-2 mb-8">
+    <Card className="bg-white rounded-xl shadow-md p-2 mb-2">
       <CardContent className="pt-6">
         <h2 className="text-xl font-bold mb-6 flex items-center">
           <CalculatorIcon className="h-6 w-6 mr-2 text-[#FEE500]" />

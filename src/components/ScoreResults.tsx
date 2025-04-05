@@ -120,7 +120,7 @@ export default function ScoreResults({ score }: ScoreResultsProps) {
   const apartmentRecommendation = recommendApartment(score.totalScore);
 
   return (
-    <Card id="score-result" className="bg-white rounded-xl shadow-md p-2 mb-8">
+    <Card id="score-result" className="bg-white rounded-xl shadow-md p-2 mt-0 mb-8">
       <CardContent className="pt-6">
         <h2 className="text-xl font-bold mb-6 flex items-center">
           <BarChart className="h-6 w-6 mr-2 text-[#3182F6]" />
