@@ -26,11 +26,14 @@ export default defineConfig({
     outDir: "dist",
     emptyOutDir: true,
     rollupOptions: {
-      input: path.resolve(__dirname, "client/src/main.tsx"),
+      input: {
+        main: path.resolve(__dirname, "client/src/main.tsx"),
+        index: path.resolve(__dirname, "public/index.html"),
+      },
       output: {
-        entryFileNames: `assets/[name].js`,
+        entryFileNames: `assets/[name].[hash].js`,
         chunkFileNames: `assets/[name].[hash].js`,
-        assetFileNames: `assets/[name].[ext]`
+        assetFileNames: `assets/[name].[hash].[ext]`
       }
     }
   },
