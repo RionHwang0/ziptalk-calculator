@@ -19,13 +19,15 @@ const useBasePath = () => {
     setLocation(base + to);
   };
   
-  return [location.replace(base, ''), setLocationWithBase] as const;
+  // base path를 제거한 실제 경로 반환
+  const currentPath = location.startsWith(base) ? location.slice(base.length) : location;
+  return [currentPath || '/', setLocationWithBase] as const;
 };
 
 function Router() {
   // 세션 스토리지에서 인증 상태 확인
   const isAuth = sessionStorage.getItem('isAdminAuthenticated') === 'true';
-  const [, navigate] = useBasePath();
+  const [location, navigate] = useBasePath();
   
   // 인증 확인 함수
   const ProtectedAdminRoute = () => {
@@ -40,7 +42,7 @@ function Router() {
   };
   
   return (
-    <Switch base={base}>
+    <Switch>
       <Route path="/" component={Home} />
       <Route path="/admin" component={ProtectedAdminRoute} />
       <Route component={NotFound} />
@@ -111,7 +113,7 @@ function Header() {
         </Link>
         <nav>
           {showAdminButton && (
-            <a href="/admin" onClick={handleAdminClick}>
+            <a href="#" onClick={handleAdminClick}>
               <Button variant="secondary" className="bg-white text-yellow-600 hover:bg-gray-100">
                 관리자 페이지
               </Button>
