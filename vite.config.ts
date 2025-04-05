@@ -17,7 +17,7 @@ export default defineConfig({
   base: "/ziptalk-calculator/",
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "client", "src"),
+      "@": path.resolve(__dirname, "src"),
       "@shared": path.resolve(__dirname, "shared"),
       "@assets": path.resolve(__dirname, "attached_assets"),
     },
@@ -25,19 +25,7 @@ export default defineConfig({
   build: {
     outDir: "dist",
     emptyOutDir: true,
-    assetsDir: "assets",
-    manifest: true,
-    rollupOptions: {
-      input: {
-        main: path.resolve(__dirname, "client/src/main.tsx")
-      },
-      output: {
-        entryFileNames: "assets/[name].js",
-        chunkFileNames: "assets/[name].js",
-        assetFileNames: "assets/[name][extname]"
-      }
-    }
+    assetsDir: "assets"
   },
   publicDir: "public",
 });
-     
