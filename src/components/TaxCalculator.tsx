@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -50,8 +51,10 @@ export default function TaxCalculator() {
 
   const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    // 모든 입력 허용
-    setPrice(value);
+    // 숫자만 허용
+    if (value === "" || /^\d+$/.test(value)) {
+      setPrice(value);
+    }
   };
 
   const calculateTax = () => {
@@ -113,13 +116,11 @@ export default function TaxCalculator() {
             <Label htmlFor="price" className="block text-sm font-medium mb-2">매매가 (만원)</Label>
             <Input
               id="price"
-              type="number"
+              type="text"
               value={price}
               onChange={handlePriceChange}
               placeholder="예: 45000"
               className="w-full p-3 border rounded-lg"
-              step="any"
-              style={{ appearance: 'textfield' }}
             />
           </div>
           
@@ -158,63 +159,58 @@ export default function TaxCalculator() {
             </Label>
           </div>
           
-          <div className="mt-6">
-            <button 
-              onClick={() => {
-                console.log("취득세 계산하기 버튼 클릭됨");
-                calculateTax();
-              }} 
-              className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-[#FEE500] text-black hover:bg-[#E6CF00] h-10 w-full py-3 px-4 font-medium rounded-lg hover:shadow-md transition duration-200"
-            >
-              계산하기
-            </button>
+          <Button 
+            onClick={calculateTax} 
+            className="w-full py-3 px-4 bg-[#FEE500] text-[#333333] font-medium rounded-lg hover:shadow-md transition duration-200"
+          >
+            계산하기
+          </Button>
+        </div>
+        
+        {taxResult && (
+          <div className="mt-8 p-4 bg-[#F5F6F7] rounded-lg space-y-2">
+            <h3 className="text-lg font-bold mb-3">총 예상 초기 비용: {formatNumber(taxResult.totalCost)}원</h3>
+            <p className="text-sm">- 취득세: {formatNumber(taxResult.acquisitionTax)}원</p>
+            <p className="text-sm">- 지방교육세: {formatNumber(taxResult.educationTax)}원</p>
+            <p className="text-sm">- 인지세: {formatNumber(taxResult.stampDuty)}원</p>
+            <p className="text-sm">- 중개수수료: {formatNumber(taxResult.brokerageFee)}원</p>
+            <p className="text-sm">- 등기비용: {formatNumber(taxResult.registrationFee)}원</p>
+            <p className="text-xs text-gray-500 mt-2">※ 9억 원 초과 주택의 경우, 중개보수 요율은 0.4% ~ 0.9% 범위 내에서 중개인과 협의가 필요합니다.</p>
+            <p className="text-xs text-gray-500">※ 인지세는 계약금액에 따라 정해진 금액으로, 매수인과 매도인이 반씩 부담하는 것이 일반적입니다.</p>
           </div>
-          
-          {taxResult && (
-            <div className="mt-8 p-4 bg-[#F5F6F7] rounded-lg space-y-2">
-              <h3 className="text-lg font-bold mb-3">총 예상 초기 비용: {formatNumber(taxResult.totalCost)}원</h3>
-              <p className="text-sm">- 취득세: {formatNumber(taxResult.acquisitionTax)}원</p>
-              <p className="text-sm">- 지방교육세: {formatNumber(taxResult.educationTax)}원</p>
-              <p className="text-sm">- 인지세: {formatNumber(taxResult.stampDuty)}원</p>
-              <p className="text-sm">- 중개수수료: {formatNumber(taxResult.brokerageFee)}원</p>
-              <p className="text-sm">- 등기비용: {formatNumber(taxResult.registrationFee)}원</p>
-              <p className="text-xs text-gray-500 mt-2">※ 9억 원 초과 주택의 경우, 중개보수 요율은 0.4% ~ 0.9% 범위 내에서 중개인과 협의가 필요합니다.</p>
-              <p className="text-xs text-gray-500">※ 인지세는 계약금액에 따라 정해진 금액으로, 매수인과 매도인이 반씩 부담하는 것이 일반적입니다.</p>
-            </div>
-          )}
+        )}
 
-          <div className="mt-6 p-4 bg-[#F8F9FA] rounded-lg">
-            <h3 className="text-sm font-medium mb-2">취득세 안내</h3>
-            <ul className="text-sm text-gray-600 space-y-1">
-              <li>• 생애최초 1주택 구입 & 6억원 이하 : 0.5%</li>
-              <li>• 6억원 이하 : 1%</li>
-              <li>• 6억원 초과 ~ 9억원 이하 : 2%</li>
-              <li>• 9억원 초과 : 3%</li>
-              <li>• 지방교육세는 취득세의 10%가 적용됩니다</li>
-              <li>• 등기비용은 대략적인 금액이며 실제와 차이가 있을 수 있습니다</li>
-            </ul>
-          </div>
-          
-          <div className="mt-4 p-4 bg-[#F8F9FA] rounded-lg">
-            <h3 className="text-sm font-medium mb-2">중개수수료 안내(상한)</h3>
-            <ul className="text-sm text-gray-600 space-y-1">
-              <li>• 5천만원 미만 : 0.6%</li>
-              <li>• 5천만원 이상 ~ 2억원 미만 : 0.5%</li>
-              <li>• 2억원 이상 ~ 6억원 미만 : 0.4%</li>
-              <li>• 6억원 이상 ~ 9억원 미만 : 0.5%</li>
-              <li>• 9억원 이상 : 0.9% (협의가능)</li>
-            </ul>
-          </div>
-          
-          <div className="mt-4 p-4 bg-[#F8F9FA] rounded-lg">
-            <h3 className="text-sm font-medium mb-2">인지세 안내</h3>
-            <ul className="text-sm text-gray-600 space-y-1">
-              <li>• 1억원 이하 : 5만원</li>
-              <li>• 1억원 초과 ~ 10억원 이하 : 15만원</li>
-              <li>• 10억원 초과 : 35만원</li>
-              <li>• 매수인과 매도인이 각각 50%씩 부담하는 것이 일반적입니다</li>
-            </ul>
-          </div>
+        <div className="mt-6 p-4 bg-[#F8F9FA] rounded-lg">
+          <h3 className="text-sm font-medium mb-2">취득세 안내</h3>
+          <ul className="text-sm text-gray-600 space-y-1">
+            <li>• 생애최초 1주택 구입 & 6억원 이하 : 0.5%</li>
+            <li>• 6억원 이하 : 1%</li>
+            <li>• 6억원 초과 ~ 9억원 이하 : 2%</li>
+            <li>• 9억원 초과 : 3%</li>
+            <li>• 지방교육세는 취득세의 10%가 적용됩니다</li>
+            <li>• 등기비용은 대략적인 금액이며 실제와 차이가 있을 수 있습니다</li>
+          </ul>
+        </div>
+        
+        <div className="mt-4 p-4 bg-[#F8F9FA] rounded-lg">
+          <h3 className="text-sm font-medium mb-2">중개수수료 안내(상한)</h3>
+          <ul className="text-sm text-gray-600 space-y-1">
+            <li>• 5천만원 미만 : 0.6%</li>
+            <li>• 5천만원 이상 ~ 2억원 미만 : 0.5%</li>
+            <li>• 2억원 이상 ~ 6억원 미만 : 0.4%</li>
+            <li>• 6억원 이상 ~ 9억원 미만 : 0.5%</li>
+            <li>• 9억원 이상 : 0.9% (협의가능)</li>
+          </ul>
+        </div>
+        
+        <div className="mt-4 p-4 bg-[#F8F9FA] rounded-lg">
+          <h3 className="text-sm font-medium mb-2">인지세 안내</h3>
+          <ul className="text-sm text-gray-600 space-y-1">
+            <li>• 1억원 이하 : 5만원</li>
+            <li>• 1억원 초과 ~ 10억원 이하 : 15만원</li>
+            <li>• 10억원 초과 : 35만원</li>
+            <li>• 매수인과 매도인이 각각 50%씩 부담하는 것이 일반적입니다</li>
+          </ul>
         </div>
       </CardContent>
     </Card>

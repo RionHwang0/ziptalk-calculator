@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -21,8 +22,10 @@ export default function HoldingTaxCalculator() {
 
   const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    // 모든 입력 허용
-    setPublicPrice(value);
+    // 숫자만 허용
+    if (value === "" || /^\d+$/.test(value)) {
+      setPublicPrice(value);
+    }
   };
 
   const calculateHoldingTax = () => {
@@ -83,13 +86,11 @@ export default function HoldingTaxCalculator() {
             <Label htmlFor="publicPrice" className="block text-sm font-medium mb-2">공시가격 (만원)</Label>
             <Input
               id="publicPrice"
-              type="number"
+              type="text"
               value={publicPrice}
               onChange={handlePriceChange}
               placeholder="예: 90000"
               className="w-full p-3 border rounded-lg"
-              step="any"
-              style={{ appearance: 'textfield' }}
             />
           </div>
           
@@ -128,15 +129,12 @@ export default function HoldingTaxCalculator() {
             </Label>
           </div>
           
-          <button 
-            onClick={() => {
-              console.log("보유세 계산하기 버튼 클릭됨");
-              calculateHoldingTax();
-            }} 
-            className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-[#FEE500] text-black hover:bg-[#E6CF00] h-10 w-full py-3 px-4 font-medium rounded-lg hover:shadow-md transition duration-200"
+          <Button 
+            onClick={calculateHoldingTax} 
+            className="w-full py-3 px-4 bg-[#FEE500] text-[#333333] font-medium rounded-lg hover:shadow-md transition duration-200"
           >
             계산하기
-          </button>
+          </Button>
         </div>
         
         {taxResult && (
