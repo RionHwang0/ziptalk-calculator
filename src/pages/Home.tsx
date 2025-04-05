@@ -49,8 +49,8 @@ export default function Home() {
               <SubscriptionCalculator onCalculate={setCalculatedScore} />
               
               {/* 계산기와 결과 사이 광고 */}
-              <div className="my-6">
-                <AdSenseAd slot="1234567890" format="auto" style={{ height: "250px" }} />
+              <div className="my-3">
+                <AdSenseAd slot="1234567890" format="auto" style={{ height: "120px" }} />
               </div>
               
               {calculatedScore && <ScoreResults score={calculatedScore} />}
