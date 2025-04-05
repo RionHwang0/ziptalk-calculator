@@ -29,7 +29,8 @@ export default defineConfig({
     manifest: true,
     rollupOptions: {
       input: {
-        main: path.resolve(__dirname, "client/src/main.tsx")
+        main: path.resolve(__dirname, "client/src/main.tsx"),
+        styles: path.resolve(__dirname, "client/src/index.css")
       },
       output: {
         entryFileNames: "assets/[name].js",
