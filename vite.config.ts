@@ -29,13 +29,17 @@ export default defineConfig({
     manifest: true,
     rollupOptions: {
       input: {
-        main: path.resolve(__dirname, "client/src/main.tsx"),
-        styles: path.resolve(__dirname, "client/src/index.css")
+        main: path.resolve(__dirname, "client/src/main.tsx")
       },
       output: {
         entryFileNames: "assets/[name].js",
         chunkFileNames: "assets/[name].js",
-        assetFileNames: "assets/[name][extname]"
+        assetFileNames: (assetInfo) => {
+          if (assetInfo.name === "index.css") {
+            return "client/src/index.css";
+          }
+          return "assets/[name][extname]";
+        }
       }
     }
   },
