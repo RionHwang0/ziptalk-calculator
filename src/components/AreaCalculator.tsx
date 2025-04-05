@@ -25,21 +25,25 @@ export default function AreaCalculator() {
   // 결과 계산 처리
   const handleCalculate = () => {
     if (activeTab === "pyeongToMeter" && pyeongValue) {
-      const pyeong = parseFloat(pyeongValue);
-      const squareMeter = convertPyeongToSquareMeter(pyeong);
-      setResult({
-        value: Math.round(squareMeter * 100) / 100, // 소수점 2자리까지
-        unit: "제곱미터 (m²)"
-      });
-      setSquareMeterValue(squareMeter.toFixed(2));
+      const pyeong = parseFloat(pyeongValue.replace(/\s/g, ''));
+      if (!isNaN(pyeong)) {
+        const squareMeter = convertPyeongToSquareMeter(pyeong);
+        setResult({
+          value: Math.round(squareMeter * 100) / 100, // 소수점 2자리까지
+          unit: "제곱미터 (m²)"
+        });
+        setSquareMeterValue(squareMeter.toFixed(2));
+      }
     } else if (activeTab === "meterToPyeong" && squareMeterValue) {
-      const squareMeter = parseFloat(squareMeterValue);
-      const pyeong = convertSquareMeterToPyeong(squareMeter);
-      setResult({
-        value: Math.round(pyeong * 100) / 100, // 소수점 2자리까지
-        unit: "평"
-      });
-      setPyeongValue(pyeong.toFixed(2));
+      const squareMeter = parseFloat(squareMeterValue.replace(/\s/g, ''));
+      if (!isNaN(squareMeter)) {
+        const pyeong = convertSquareMeterToPyeong(squareMeter);
+        setResult({
+          value: Math.round(pyeong * 100) / 100, // 소수점 2자리까지
+          unit: "평"
+        });
+        setPyeongValue(pyeong.toFixed(2));
+      }
     }
   };
   
@@ -50,21 +54,26 @@ export default function AreaCalculator() {
     setActiveTab(newTab);
     
     // 값 초기화
+    setPyeongValue("");
+    setSquareMeterValue("");
     setResult(null);
   };
   
   // 필드 변경 처리
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, field: 'pyeong' | 'squareMeter') => {
-    const value = e.target.value;
+    const value = e.target.value.replace(/\s/g, ''); // 공백 제거
     
-    if (field === 'pyeong') {
-      setPyeongValue(value);
-    } else {
-      setSquareMeterValue(value);
+    // 숫자와 소수점만 허용
+    if (value === '' || /^\d*\.?\d*$/.test(value)) {
+      if (field === 'pyeong') {
+        setPyeongValue(value);
+      } else {
+        setSquareMeterValue(value);
+      }
+      
+      // 결과 초기화
+      setResult(null);
     }
-    
-    // 결과 초기화
-    setResult(null);
   };
 
   return (
