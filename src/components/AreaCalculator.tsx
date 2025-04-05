@@ -29,7 +29,7 @@ export default function AreaCalculator() {
       console.log("제곱미터 값:", squareMeterValue);
       
       if (activeTab === "pyeongToMeter" && pyeongValue) {
-        // 문자열에서 숫자로 변환
+        // 문자열에서 숫자로 변환 (콤마 제거)
         const pyeong = parseFloat(pyeongValue.replace(/,/g, ''));
         console.log("변환할 평수:", pyeong);
         
@@ -47,7 +47,7 @@ export default function AreaCalculator() {
           alert("유효한 숫자를 입력해주세요.");
         }
       } else if (activeTab === "meterToPyeong" && squareMeterValue) {
-        // 문자열에서 숫자로 변환
+        // 문자열에서 숫자로 변환 (콤마 제거)
         const squareMeter = parseFloat(squareMeterValue.replace(/,/g, ''));
         console.log("변환할 제곱미터:", squareMeter);
         
@@ -99,14 +99,11 @@ export default function AreaCalculator() {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, field: 'pyeong' | 'squareMeter') => {
     const value = e.target.value;
     
-    // 숫자와 소수점만 허용
-    const numericValue = value.replace(/[^0-9.]/g, '');
-    
-    // 입력값 업데이트
+    // 입력값 업데이트 - 모든 입력 허용
     if (field === 'pyeong') {
-      setPyeongValue(numericValue);
+      setPyeongValue(value);
     } else {
-      setSquareMeterValue(numericValue);
+      setSquareMeterValue(value);
     }
     
     // 결과 초기화
