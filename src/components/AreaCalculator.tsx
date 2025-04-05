@@ -25,7 +25,7 @@ export default function AreaCalculator() {
   // 결과 계산 처리
   const handleCalculate = () => {
     if (activeTab === "pyeongToMeter" && pyeongValue) {
-      const pyeong = parseFloat(pyeongValue.replace(/\s/g, ''));
+      const pyeong = parseFloat(pyeongValue);
       if (!isNaN(pyeong)) {
         const squareMeter = convertPyeongToSquareMeter(pyeong);
         setResult({
@@ -35,7 +35,7 @@ export default function AreaCalculator() {
         setSquareMeterValue(squareMeter.toFixed(2));
       }
     } else if (activeTab === "meterToPyeong" && squareMeterValue) {
-      const squareMeter = parseFloat(squareMeterValue.replace(/\s/g, ''));
+      const squareMeter = parseFloat(squareMeterValue);
       if (!isNaN(squareMeter)) {
         const pyeong = convertSquareMeterToPyeong(squareMeter);
         setResult({
@@ -61,19 +61,17 @@ export default function AreaCalculator() {
   
   // 필드 변경 처리
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, field: 'pyeong' | 'squareMeter') => {
-    const value = e.target.value.replace(/\s/g, ''); // 공백 제거
+    const value = e.target.value;
     
-    // 숫자와 소수점만 허용
-    if (value === '' || /^\d*\.?\d*$/.test(value)) {
-      if (field === 'pyeong') {
-        setPyeongValue(value);
-      } else {
-        setSquareMeterValue(value);
-      }
-      
-      // 결과 초기화
-      setResult(null);
+    // 입력값 업데이트
+    if (field === 'pyeong') {
+      setPyeongValue(value);
+    } else {
+      setSquareMeterValue(value);
     }
+    
+    // 결과 초기화
+    setResult(null);
   };
 
   return (
