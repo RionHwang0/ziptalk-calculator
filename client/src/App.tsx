@@ -11,16 +11,27 @@ import { useState, useEffect } from "react";
 // GitHub Pages의 base URL을 설정
 const base = '/ziptalk-calculator';
 
+// Wouter의 useLocation hook을 커스터마이징하여 base path를 처리
+const useBasePath = () => {
+  const [location, setLocation] = useLocation();
+  
+  const setLocationWithBase = (to: string) => {
+    setLocation(base + to);
+  };
+  
+  return [location.replace(base, ''), setLocationWithBase] as const;
+};
+
 function Router() {
   // 세션 스토리지에서 인증 상태 확인
   const isAuth = sessionStorage.getItem('isAdminAuthenticated') === 'true';
-  const [, navigate] = useLocation();
+  const [, navigate] = useBasePath();
   
   // 인증 확인 함수
   const ProtectedAdminRoute = () => {
     useEffect(() => {
       if (!isAuth) {
-        navigate(base + '/');
+        navigate('/');
         alert('관리자 페이지에 접근 권한이 없습니다.');
       }
     }, []);
@@ -43,7 +54,7 @@ function Header() {
   const [password, setPassword] = useState("");
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [showAdminButton, setShowAdminButton] = useState(false);
-  const [, navigate] = useLocation();
+  const [, navigate] = useBasePath();
 
   // 관리자 인증 처리
   const handleAuthentication = () => {
@@ -55,7 +66,7 @@ function Header() {
       sessionStorage.setItem('isAdminAuthenticated', 'true');
       setShowAuthModal(false);
       setShowAdminButton(true);
-      navigate(base + "/admin");
+      navigate("/admin");
     } else {
       alert("비밀번호가 일치하지 않습니다.");
     }
@@ -88,19 +99,19 @@ function Header() {
     if (!isAuthenticated) {
       setShowAuthModal(true);
     } else {
-      navigate(base + "/admin");
+      navigate("/admin");
     }
   };
 
   return (
     <header className="bg-yellow-500 text-white py-4">
       <div className="container mx-auto flex justify-between items-center px-4">
-        <Link href={base + "/"}>
+        <Link href="/">
           <h1 className="text-xl font-bold cursor-pointer">부동산 계산기</h1>
         </Link>
         <nav>
           {showAdminButton && (
-            <a href={base + "/admin"} onClick={handleAdminClick}>
+            <a href="/admin" onClick={handleAdminClick}>
               <Button variant="secondary" className="bg-white text-yellow-600 hover:bg-gray-100">
                 관리자 페이지
               </Button>
