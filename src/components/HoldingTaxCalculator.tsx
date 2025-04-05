@@ -83,11 +83,13 @@ export default function HoldingTaxCalculator() {
             <Label htmlFor="publicPrice" className="block text-sm font-medium mb-2">공시가격 (만원)</Label>
             <Input
               id="publicPrice"
-              type="text"
+              type="number"
               value={publicPrice}
               onChange={handlePriceChange}
               placeholder="예: 90000"
               className="w-full p-3 border rounded-lg"
+              step="any"
+              style={{ appearance: 'textfield' }}
             />
           </div>
           
