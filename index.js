@@ -449,7 +449,7 @@ var vite_config_default = defineConfig({
   base: "/ziptalk-calculator/",
   resolve: {
     alias: {
-      "@": path2.resolve(__dirname, "client", "src"),
+      "@": path2.resolve(__dirname, "src"),
       "@shared": path2.resolve(__dirname, "shared"),
       "@assets": path2.resolve(__dirname, "attached_assets")
     }
@@ -457,18 +457,7 @@ var vite_config_default = defineConfig({
   build: {
     outDir: "dist",
     emptyOutDir: true,
-    assetsDir: "assets",
-    manifest: true,
-    rollupOptions: {
-      input: {
-        main: path2.resolve(__dirname, "client/src/main.tsx")
-      },
-      output: {
-        entryFileNames: "assets/[name].js",
-        chunkFileNames: "assets/[name].js",
-        assetFileNames: "assets/[name][extname]"
-      }
-    }
+    assetsDir: "assets"
   },
   publicDir: "public"
 });
