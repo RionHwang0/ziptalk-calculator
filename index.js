@@ -458,11 +458,13 @@ var vite_config_default = defineConfig({
     outDir: "dist",
     emptyOutDir: true,
     rollupOptions: {
-      input: path2.resolve(__dirname, "client/src/main.tsx"),
+      input: {
+        main: path2.resolve(__dirname, "client/src/main.tsx")
+      },
       output: {
-        entryFileNames: "assets/[name].[hash].js",
+        entryFileNames: "assets/[name].js",
         chunkFileNames: "assets/[name].[hash].js",
-        assetFileNames: "assets/[name].[hash].[ext]"
+        assetFileNames: "assets/[name].[ext]"
       }
     }
   },
