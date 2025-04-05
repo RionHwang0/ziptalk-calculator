@@ -461,7 +461,8 @@ var vite_config_default = defineConfig({
     manifest: true,
     rollupOptions: {
       input: {
-        main: path2.resolve(__dirname, "client/src/main.tsx")
+        main: path2.resolve(__dirname, "client/src/main.tsx"),
+        styles: path2.resolve(__dirname, "client/src/index.css")
       },
       output: {
         entryFileNames: "assets/[name].js",
