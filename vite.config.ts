@@ -30,9 +30,9 @@ export default defineConfig({
         main: path.resolve(__dirname, "public", "index.html"),
       },
       output: {
-        entryFileNames: `assets/[name].[hash].js`,
+        entryFileNames: `assets/[name].js`,
         chunkFileNames: `assets/[name].[hash].js`,
-        assetFileNames: `assets/[name].[hash].[ext]`
+        assetFileNames: `assets/[name].[ext]`
       }
     }
   },
