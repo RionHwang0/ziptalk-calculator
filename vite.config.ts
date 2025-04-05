@@ -25,6 +25,7 @@ export default defineConfig({
   build: {
     outDir: "dist",
     emptyOutDir: true,
+    assetsDir: "assets",
     rollupOptions: {
       input: {
         main: path.resolve(__dirname, "client/src/main.tsx")
@@ -32,7 +33,17 @@ export default defineConfig({
       output: {
         entryFileNames: "assets/[name].js",
         chunkFileNames: "assets/[name].[hash].js",
-        assetFileNames: "assets/[name].[ext]"
+        assetFileNames: (assetInfo) => {
+          const info = assetInfo.name.split('.');
+          const ext = info[info.length - 1];
+          if (/\.(png|jpe?g|gif|svg|ico|webp)$/.test(assetInfo.name)) {
+            return `assets/images/[name][extname]`;
+          }
+          if (/\.css$/.test(assetInfo.name)) {
+            return `assets/[name][extname]`;
+          }
+          return `assets/[name][extname]`;
+        }
       }
     }
   },
